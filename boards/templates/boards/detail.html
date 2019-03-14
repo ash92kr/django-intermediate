@@ -22,4 +22,26 @@
         <input type="submit" value="삭제"/>   <!--버튼 자체를 form으로 만든 것-->
     </form>
     
+    <!--{# for comment in board.comment_set.all #}-->   <!--이렇게 쓰기보다 장고 템플릿으로 넘어오는 게 낫다-->
+        
+    {% for comment in comments %}
+        <li>
+            {{ comment.content }}
+            <form action="{% url 'boards:comments_delete' board.pk comment.pk %}" method="POST" onsubmit="return confirm('삭제하겠습니까?');" style="display: inline">
+                {% csrf_token %}
+                <input type="submit" value="삭제">
+            </form>
+        </li>   <!--삭제는 pk를 2개 보내주어야 한다 - 주소의 순서대로 입력해야 한다-->
+    {% empty %}
+        <p><b>댓글이 없어요...</b></p>
+    {% endfor %}
+    
+    <hr>
+    <p>댓글 작성 / {{ comments | length }} 개의 댓글</p>
+    <form action="{% url 'boards:comments_create' board.pk %}" method="POST">
+        {% csrf_token %}
+        comment: <input type="text" name="content">
+        <input type="submit" value="submit">
+    </form>
+        
 {% endblock %}
