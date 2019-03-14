@@ -4,7 +4,8 @@
     
     <h1>New</h1>
     <!--<form action="/boards/create/" method="POST">-->
-    <form action="{% url 'boards:create' %}" method="POST">  
+    <!--<form action="{% url 'boards:new' %}" method="POST">-->
+    <form method="POST">   <!--action이 없으면 자기 위치로 form을 보내므로(POST) CREATE이 됨-->
         {% csrf_token %}
         <label for="title">TITLE</label>
         <input type="text" name="title" id="title"/><br>

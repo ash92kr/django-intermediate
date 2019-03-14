@@ -4,7 +4,9 @@
     
     <h1>Edit</h1>
     <!--<form action="/boards/{{ board.pk }}/update/" method="POST">-->
-    <form action="{% url 'boards:update' board.pk %}" method="POST">
+    <!--<form action="{# url 'boards:edit' board.pk #}" method="POST">-->
+    <!--<form action="" method="POST">-->
+    <form method="POST">
         {% csrf_token %}
         <label for="title">TITLE</label>
         <input type="text" name="title" id="title" value="{{ board.title }}"/><br>

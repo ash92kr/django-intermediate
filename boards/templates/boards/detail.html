@@ -14,7 +14,12 @@
     <!--<a href="/boards/{{ board.pk }}/edit/">[수정]</a>-->
     <a href="{% url 'boards:edit' board.pk %}">[수정]</a>  <!--urls.py의 edit 뷰 함수 이름에 board.pk를 붙임-->
     <!--<a href="/boards/{{ board.pk }}/delete/" onclick="return confirm('ARE YOU SURE?')">[삭제]</a>-->
-    <a href="{% url 'boards:delete' board.pk %}" onclick="return confirm('ARE YOU SURE?')">[삭제]</a>
+    <!--<a href="{# url 'boards:delete' board.pk #}" onclick="return confirm('ARE YOU SURE?')">[삭제]</a>-->
     <!--여러 개의 pk가 들어가는 경우 순서를 맞춰 적어주면 된다-->
-
+    
+    <form action="{% url 'boards:delete' board.pk %}" method="POST" style="display:inline" onsubmit="return confirm('ARE YOU SURE?');">
+        {% csrf_token %}                                                                       <!--자바스크립트 방식이므로 ;입력-->
+        <input type="submit" value="삭제"/>   <!--버튼 자체를 form으로 만든 것-->
+    </form>
+    
 {% endblock %}
